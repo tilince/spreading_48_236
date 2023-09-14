@@ -33,12 +33,32 @@ this is second title
 <SCodeBlock language="js" focus="" filename="index.js" tabid="0">
 
 ```js
-for prompt_object in prompt_objects:
-    # 打印prompt_object中的prompt_id
-    print("Updating: ", prompt_object["prompt_id"])
-    if prompt_object["prompt_id"] == 2:
-        print(prompt_object["prompt"])
-    execute_curl_command(prompt_object)
+
+function generageOpenAIParameters(reqBody: PageParams) {
+    let openAIParameters = { temperature: 0.5, moduleName: 'gpt-3.5-turbo', prompt: '', parameters: {} }
+    const { function_type, parameters } = reqBody
+    let prompt = PROMPT_FUNCTION_TYPE_MAP[function_type]
+    if (function_type === 'code_to_doc') {
+        if (parameters['code'].length > 2500) {
+            openAIParameters.moduleName = 'gpt-3.5-turbo-16k'
+        }
+        if (parameters['doc_type'] === 'API explanation') {
+            prompt = parameters['code_type'] === 'class/interface' ? PROMPT_CODE_TO_DOC_CLASS : PROMPT_CODE_TO_DOC_FUNCTION
+        } else {
+            prompt = PROMPT_CODE_TO_DOC_GENERAL
+        }
+    } else if (function_type === 'translate_code' || function_type === 'code_to_doc' || function_type === 'enhance_code' || function_type === 'explain_code') {
+        openAIParameters.temperature = 0;
+    } else if (function_type === 'generate_outline') {
+        if (!parameters['more_info']) {
+            prompt = PROMPT_GENERATE_OUTLINE_WITHOUT_MORE_INFO
+        }
+    }
+    openAIParameters.prompt = prompt
+    openAIParameters.parameters = parameters
+
+    return openAIParameters;
+}
 ```
 </SCodeBlock>
 
