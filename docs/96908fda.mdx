@@ -34,6 +34,16 @@ clone(location, token)
 </SH>
 
 
+<SCodeBlockTab>
+
+<SCodeBlock language="plain text" focus="" filename="Universal" tabid="0">
+
+```plain text
+```
+</SCodeBlock>
+
+</SCodeBlockTab>
+
 This function takes in two parameters: <code>location</code> and <code>token</code>. It replaces the "https://" in the <code>location</code> string with "https://" + <code>token</code> + "@" and assigns the modified string back to <code>location</code>. It then prints the modified <code>location</code> string. After that, it uses the <code>subprocess.call()</code> function to execute the "git clone" command with the modified <code>location</code> string as one of the arguments, along with other arguments like "--recurse-submodules" and "--depth". Finally, it prints a message indicating that the clone operation was successful.
 
 Example usage:
