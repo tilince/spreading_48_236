@@ -1,3 +1,13 @@
+---
+toc: 
+    - title: "title1"
+      url: "#h-title1"
+      level: "1"
+      children:
+        - title: "this is second title"
+          url: "#h-this-is-second-title"
+          level: "2"
+---
 
 {/* import-start */}
 import { SH, STitle, SImage, SCodeBlock, SCodeBlockTab, SCallout, SCalloutHeader, SCalloutContent,  STable, STableRow, STableHeader, STableCell, SVideo } from "listen-test-ui";
@@ -8,3 +18,98 @@ import { SH, STitle, SImage, SCodeBlock, SCodeBlockTab, SCallout, SCalloutHeader
 ttt
 </STitle>
 
+<SH level="1" id="h-clonelocation-token">
+clone(location, token)
+</SH>
+
+
+This function takes in two parameters: <code>location</code> and <code>token</code>. It replaces the "https://" in the <code>location</code> string with "https://" + <code>token</code> + "@" and assigns the modified string back to <code>location</code>. It then prints the modified <code>location</code> string. After that, it uses the <code>subprocess.call()</code> function to execute the "git clone" command with the modified <code>location</code> string as one of the arguments, along with other arguments like "--recurse-submodules" and "--depth". Finally, it prints a message indicating that the clone operation was successful.
+
+Example usage:
+
+<SCodeBlock language="plain text" focus="" filename="" tabid="0">
+
+```plain text
+clone("https://github.com/example/repo.git", "token123")
+```
+</SCodeBlock>
+
+<SH level="1" id="h-cloneallbranchlocation-token-dir">
+clone_all_branch(location, token, dir)
+</SH>
+
+
+This function takes in three parameters: <code>location</code>, <code>token</code>, and <code>dir</code>. It replaces the "https://" in the <code>location</code> string with "https://" + <code>token</code> + "@" and assigns the modified string back to <code>location</code>. It then uses the <code>subprocess.run()</code> function to execute the "git clone" command with the modified <code>location</code> string as one of the arguments, along with other arguments like "--bare" and <code>dir</code>. Next, it uses the <code>subprocess.check_output()</code> function to get the list of remote branches for the repository specified by <code>location</code>. It then processes the output to extract the branch names and stores them in the <code>branch_list</code> variable. After that, it prints the branch list. Finally, it uses a loop to iterate over each branch in the <code>branch_list</code> and uses the <code>subprocess.run()</code> function to execute the "git worktree add" command to pull each branch into a different directory.
+
+Example usage:
+
+<SCodeBlock language="plain text" focus="" filename="" tabid="0">
+
+```plain text
+clone_all_branch("https://github.com/example/repo.git", "token123", "my_directory")
+```
+</SCodeBlock>
+
+<SH level="1" id="h-renamesite">
+rename(site)
+</SH>
+
+
+This function takes in one parameter: <code>site</code>. It opens the "package.json" file in read mode and loads its contents into the <code>data</code> variable as a JSON object. It then modifies the value of the "name" key in the <code>data</code> object to the value of the <code>site</code> parameter. After that, it opens the "package.json" file in write mode and writes the modified <code>data</code> object back to the file as a JSON string with an indentation of 4 spaces.
+
+Example usage:
+
+<SCodeBlock language="plain text" focus="" filename="" tabid="0">
+
+```plain text
+rename("my_site")
+```
+</SCodeBlock>
+
+<SH level="1" id="h-genrunshexecdir">
+gen_run_sh(exec_dir)
+</SH>
+
+
+This function takes in one parameter: <code>exec_dir</code>. It opens the "run.sh" file in write mode and writes a bash script to the file. The script changes the current directory to the value of the <code>exec_dir</code> parameter and then executes the "node server.js" command.
+
+Example usage:
+
+<SCodeBlock language="plain text" focus="" filename="" tabid="0">
+
+```plain text
+gen_run_sh("my_directory")
+```
+</SCodeBlock>
+
+<SH level="1" id="h-gentemplatemountdir">
+gen_template(mount_dir)
+</SH>
+
+
+This function takes in one parameter: <code>mount_dir</code>. It opens the "template.yaml" file in write mode and writes a template string to the file. The template string is formatted with the value of the <code>mount_dir</code> parameter.
+
+Example usage:
+
+<SCodeBlock language="plain text" focus="" filename="" tabid="0">
+
+```plain text
+gen_template("my_directory")
+```
+</SCodeBlock>
+
+<SH level="1" id="h-reportbuildstatusurl-code-msg-workspace-site-apiid-sign-functionarn">
+report_build_status(url, code, msg, workspace, site, api_id, sign, function_arn)
+</SH>
+
+
+This function takes in eight parameters: <code>url</code>, <code>code</code>, <code>msg</code>, <code>workspace</code>, <code>site</code>, <code>api_id</code>, <code>sign</code>, and <code>function_arn</code>. It creates a dictionary <code>body</code> and assigns values to its keys based on the provided parameters. It then converts the <code>body</code> dictionary to a JSON string using the <code>json.dumps()</code> function. Finally, it uses the <code>subprocess.call()</code> function to execute the "curl" command with the JSON string as the data payload and other arguments like "-X", "-H", and "-d".
+
+Example usage:
+
+<SCodeBlock language="plain text" focus="" filename="" tabid="0">
+
+```plain text
+report_build_status("https://example.com/api", 200, "Build successful", 123, 456, "api123", "sign123", "arn:aws:lambda:us-west-1:123456789:function:my-function")
+```
+</SCodeBlock>
