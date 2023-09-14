@@ -30,3 +30,86 @@ Untitled
 ```
 </SCodeBlock>
 
+<SH level="1" id="h-code-explanation">
+Code Explanation
+</SH>
+
+
+The provided code is written in Objective-C and is part of a view controller's implementation file. It contains three methods: <code>viewDidLoad</code>, <code>setupUI</code>, and <code>startVideoTalk</code>.
+
+<SH level="2" id="h-viewdidload-method">
+viewDidLoad Method
+</SH>
+
+
+The <code>viewDidLoad</code> method is a built-in method in iOS that is called when the view controller's view is loaded into memory. In this method, the <code>setupUI</code> method is called, and then the <code>super</code> class's <code>viewDidLoad</code> method is called.
+
+<SH level="2" id="h-setupui-method">
+setupUI Method
+</SH>
+
+
+The <code>setupUI</code> method is responsible for setting up the user interface of the view controller. It creates a <code>UIView</code> called <code>remoteUserView</code> and sets its frame and background color. The <code>remoteUserView</code> is then added as a subview to the view controller's view.
+
+Next, two buttons called <code>startVideoTalkButton</code> and <code>stopVideoTalkButton</code> are created using the <code>UIButton</code> class. The buttons are added as subviews to the view controller's view and their frames are set. The <code>startVideoTalkButton</code> is positioned 280 points from the bottom of the view, while the <code>stopVideoTalkButton</code> is positioned 200 points from the bottom.
+
+The title, font, and target-action methods are set for both buttons. The <code>startVideoTalkButton</code> is set to display the title "Start" and calls the <code>startVideoTalk</code> method when tapped. The <code>stopVideoTalkButton</code> is set to display the title "Stop", has a red color for its title, and calls the <code>stopVideoTalk</code> method when tapped.
+
+<SH level="2" id="h-startvideotalk-method">
+startVideoTalk Method
+</SH>
+
+
+The <code>startVideoTalk</code> method is called when the <code>startVideoTalkButton</code> is tapped. It calls three other methods: <code>createEngine</code>, <code>loginRoom</code>, and <code>startPublish</code>.
+
+<SH level="2" id="h-code-example">
+Code Example
+</SH>
+
+
+Here is an example usage of the provided code:
+
+<SCodeBlock language="plain text" focus="" filename="" tabid="0">
+
+```plain text
+#import "ViewController.h"
+
+@implementation ViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self setupUI];
+}
+
+- (void)setupUI {
+    self.remoteUserView = [[UIView alloc] initWithFrame:CGRectMake(100, 100, 180, 250)];
+    self.remoteUserView.backgroundColor = [UIColor lightGrayColor];
+    [self.view addSubview:self.remoteUserView];
+
+    self.startVideoTalkButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [self.view addSubview:self.startVideoTalkButton];
+    self.startVideoTalkButton.frame = CGRectMake(100, self.view.bounds.size.height - 280, 150, 50);
+    [self.startVideoTalkButton.titleLabel setFont:[UIFont systemFontOfSize:32]];
+    [self.startVideoTalkButton setTitle:@"Start" forState:UIControlStateNormal];
+    [self.startVideoTalkButton addTarget:self action:@selector(startVideoTalk:) forControlEvents:UIControlEventTouchUpInside];
+
+    self.stopVideoTalkButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [self.view addSubview:self.stopVideoTalkButton];
+    self.stopVideoTalkButton.frame = CGRectMake(100, self.view.bounds.size.height - 200, 150, 50);
+    [self.stopVideoTalkButton.titleLabel setFont:[UIFont systemFontOfSize:32]];
+    [self.stopVideoTalkButton setTitle:@"Stop" forState:UIControlStateNormal];
+    [self.stopVideoTalkButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    [self.stopVideoTalkButton addTarget:self action:@selector(stopVideoTalk:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)startVideoTalk:(UIButton *)button {
+    [self createEngine];
+    [self loginRoom];
+    [self startPublish];
+}
+
+@end
+```
+</SCodeBlock>
+
+This example shows how the code can be implemented in a view controller class. The <code>viewDidLoad</code> method calls the <code>setupUI</code> method, which sets up the user interface. The <code>startVideoTalk</code> method is called when the "Start" button is tapped, and it performs some actions related to video talk functionality.
